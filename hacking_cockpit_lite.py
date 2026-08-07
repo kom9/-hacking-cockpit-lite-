@@ -215,7 +215,7 @@ def run_one(tool, args, timeout=180):
 # ── Advance: Parallel Recon (fitur LANGKA) ──────────────────────
 RECON_ARGS = {
     "nmap": "-sV -sC -T4", "rustscan": "-a --ulimit 5000",
-    "httpx": "-title -tech-detect -status-code", "whatweb": "-v",
+    "httpx": "-m HEAD --timeout 8", "whatweb": "-v",
     "subfinder": "-silent", "dnsenum": "", "whois": "",
 }
 def parallel_recon(target, tools=None, timeout=300, project_id=""):
@@ -225,7 +225,12 @@ def parallel_recon(target, tools=None, timeout=300, project_id=""):
         return "[PARALLEL] Tidak ada tool recon tersedia."
     out = ["═"*56, f" [PARALLEL RECON: {target}]", "═"*56]
     with ThreadPoolExecutor(max_workers=min(len(avail), 8)) as ex:
-        futs = {ex.submit(run_one, t, args, timeout): t for t, args in avail}
+        def _cmd(t, args):
+            tgt = target.strip()
+            if t == "httpx" and not tgt.startswith(("http://", "https://")):
+                tgt = "http://" + tgt
+            return args + " " + tgt
+        futs = {ex.submit(run_one, t, _cmd(t, args), timeout): t for t, args in avail}
         for f in as_completed(futs):
             tool, text, err, dur = f.result()
             out.append(f"\n── {tool.upper()} ({dur:.1f}s) ──\n{text[:2500]}")
