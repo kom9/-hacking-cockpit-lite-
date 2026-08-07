@@ -15,6 +15,18 @@ Only **471 lines of code**, a single file, yet it ships features usually found o
 
 ---
 
+## 🎬 Demo
+
+![Cockpit Lite Demo](assets/demo.gif)
+
+*Live terminal demo: parallel recon → attack-path analysis → report generation.*
+
+![Cockpit Lite Report](assets/screenshot.png)
+
+*Self-contained HTML report with compliance auto-tagging (OWASP / PCI-DSS / CWE).*
+
+---
+
 ## ✨ Rare Features (seldom seen in other MCPs)
 
 - 🚀 **Parallel Recon** — run `nmap`, `httpx`, `whatweb`, `subfinder` simultaneously via a thread pool
