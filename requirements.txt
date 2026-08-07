@@ -1,0 +1,8 @@
+# Core MCP SDK (required)
+mcp>=1.0
+
+# HTTP for Discord/Slack notifications (optional but recommended)
+requests>=2.0
+
+# PDF report export (optional — enables WeasyPrint reports)
+# weasyprint>=60

@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+
+# Runtime data (never commit)
+mcp_workspace/
+mcp_projects/
+mcp_pentest_reports/
+*.db
+cockpit_findings.db
+
+# Secrets (never commit API keys / configs)
+.env
+claude_desktop_config.json
+cline_mcp_settings.json
+*_config.json
+
+# OS
+.DS_Store
